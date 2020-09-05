@@ -16,8 +16,6 @@ jobs:
           command: flutter test
 
   linting:
-    branches:
-      only: master
     docker:
       - image: busybox:latest
     steps:
@@ -53,7 +51,11 @@ workflows:
   version: 2
   sample_pipeline:
     jobs:
-      - linting
+      - linting:
+          filters:
+            branches:
+              only:
+                - master
       - unit_test
       - build_artifact:
           requires:
