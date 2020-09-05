@@ -1,9 +1,5 @@
 version: 2
 jobs:
-  hold:
-    type: approval
-    requires:
-      - build
   build:
       docker:
         - image: cirrusci/flutter:1.20.3
@@ -30,4 +26,14 @@ jobs:
         - store_artifacts:
             path: build/app/outputs/apk/release/app-release.apk
 
+workflows:
+  version: 2
+  sample_pipeline:
+    jobs:
+      - hold:
+          type: approval
+
+      - build:
+          requires:
+            - hold
 
