@@ -4,6 +4,9 @@ jobs:
       docker:
         - image: cirrusci/flutter:1.20.3
 
+      hold:
+        type: approval
+
       branches:
         only: master
 
@@ -26,7 +29,4 @@ jobs:
         - store_artifacts:
             path: build/app/outputs/apk/release/app-release.apk
 
-  hold:
-    type: approval
-    requires:
-      - build
+
