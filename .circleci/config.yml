@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  flutter_build:
     docker:
       - image: cirrusci/flutter:1.20.3
 
@@ -21,7 +21,7 @@ jobs:
       - store_artifacts:
           path: build/app/outputs/apk/release/app-release.apk
 
-  relese:
+  flutter_relese:
     docker:
       - image: cirrusci/flutter:1.20.3
     branches:
@@ -79,7 +79,7 @@ workflows:
     jobs:
       - linting
       - unit_test
-      - build
+      - flutter_build
       - build_artifact:
           requires:
             - unit_test
@@ -92,6 +92,6 @@ workflows:
           type: approval
           requires:
             - deploy_to_dev
-      - relese:
+      - flutter_build:
           requires:
             - hold_for_approval
