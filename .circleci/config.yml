@@ -1,7 +1,7 @@
 version: 2
 jobs:
 
-  flutter_relese:
+  flutter_release:
     docker:
       - image: cirrusci/flutter:1.20.3
     branches:
@@ -15,7 +15,7 @@ jobs:
           command: flutter build apk --release
       - store_artifacts:
           path: build/app/outputs/apk/release/app-release.apk
-          
+
   unit_test:
     docker:
       - image: busybox:latest
