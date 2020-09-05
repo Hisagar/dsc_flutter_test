@@ -4,8 +4,7 @@ jobs:
     docker:
       - image: cirrusci/flutter:1.20.3
 
-    branches:
-      only: master
+
 
     steps:
       - checkout
@@ -17,7 +16,7 @@ jobs:
       - run:
           name: Run the application tests
           command: flutter test
-          
+
   linting:
     docker:
       - image: busybox:latest
