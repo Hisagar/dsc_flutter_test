@@ -21,8 +21,11 @@ jobs:
       - run:
           name: Build Artifact
           command: echo "Going to run the build artifact"
-          
+
   flutter_release:
+    filters:
+      branches:
+        only: master
     docker:
       - image: cirrusci/flutter:1.20.3
     branches:
