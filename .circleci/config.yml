@@ -92,6 +92,6 @@ workflows:
           type: approval
           requires:
             - deploy_to_dev
-      - flutter_build:
+      - flutter_release:
           requires:
             - hold_for_approval
