@@ -1,23 +1,5 @@
 version: 2
 jobs:
-  flutter_build:
-    docker:
-      - image: cirrusci/flutter:1.20.3
-
-    branches:
-      only: master
-
-    steps:
-      - checkout
-
-      - run:
-          name: Run Flutter doctor
-          command: flutter doctor
-
-      - run:
-          name: Run the application tests
-          command: flutter test
-
 
   flutter_relese:
     docker:
@@ -31,10 +13,9 @@ jobs:
       - run:
           name: Build the Android version
           command: flutter build apk --release
-
       - store_artifacts:
           path: build/app/outputs/apk/release/app-release.apk
-
+          
   unit_test:
     docker:
       - image: busybox:latest
@@ -80,13 +61,13 @@ workflows:
     jobs:
       - linting
       - unit_test
-      - flutter_build:
+      - build_artifact:
           requires:
             - unit_test
             - linting
       - deploy_to_dev:
           requires:
-            - flutter_build
+            - build_artifact
       - hold_for_approval:
           type: approval
           requires:
