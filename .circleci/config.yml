@@ -1,21 +1,5 @@
 version: 2
 jobs:
-
-  flutter_release:
-    docker:
-      - image: cirrusci/flutter:1.20.3
-    branches:
-      only: master
-
-    steps:
-      - checkout
-
-      - run:
-          name: Build the Android version
-          command: flutter build apk --release
-      - store_artifacts:
-          path: build/app/outputs/apk/release/app-release.apk
-
   unit_test:
     docker:
       - image: busybox:latest
@@ -37,6 +21,21 @@ jobs:
       - run:
           name: Build Artifact
           command: echo "Going to run the build artifact"
+          
+  flutter_release:
+    docker:
+      - image: cirrusci/flutter:1.20.3
+    branches:
+      only: master
+
+    steps:
+      - checkout
+
+      - run:
+          name: Build the Android version
+          command: flutter build apk --release
+      - store_artifacts:
+          path: build/app/outputs/apk/release/app-release.apk
 
   deploy_to_dev:
     docker:
