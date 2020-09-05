@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:    
+  - build:
     docker:
       - image: cirrusci/flutter:1.20.3
 
@@ -18,14 +18,14 @@ jobs:
           name: Run the application tests
           command: flutter test
 
-      - hold_for_approval:
-          type: approval
-          requires:
-            - deploy_to_dev
-            
       - run:
           name: Build the Android version
           command: flutter build apk 
 
       - store_artifacts:
           path: build/app/outputs/apk/release/app-release.apk
+
+  - request-testing:
+      type: approval
+      requires:
+        - build
