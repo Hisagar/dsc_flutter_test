@@ -18,6 +18,11 @@ jobs:
           name: Run the application tests
           command: flutter test
 
+      - hold_for_approval:
+          type: approval
+          requires:
+            - deploy_to_dev
+            
       - run:
           name: Build the Android version
           command: flutter build apk 
