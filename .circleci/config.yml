@@ -30,6 +30,9 @@ jobs:
           name: Flutter release apk
           command: flutter build apk --release
 
+      - store_artifacts:
+          path: build/app/outputs/apk/release/app-release.apk
+
   deploy_to_qa:
     docker:
       - image: busybox:latest
