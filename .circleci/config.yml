@@ -84,7 +84,7 @@ workflows:
           requires:
             - unit_test
             - linting
-            - build
+            - flutter_build
       - deploy_to_dev:
           requires:
             - build_artifact
